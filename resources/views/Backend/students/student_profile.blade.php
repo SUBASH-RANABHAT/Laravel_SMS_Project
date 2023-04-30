@@ -1,1 +1,0 @@
-<h1 class="text-center">Welcome to the Student page!!!</h1>

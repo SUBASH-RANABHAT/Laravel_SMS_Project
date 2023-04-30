@@ -6,6 +6,7 @@
       <thead>
           <tr>
               <th>Name</th>
+              <th>Class</th>
               <th>Roll No</th>
               <th>Email</th>
               <th>Image</th>
@@ -17,6 +18,7 @@
             @forelse($posts as $post)
     <tr>
         <td>{{ $post->name }}</td>
+        <td>{{ $post->class }}</td>
         <td>{{ $post->roll_no}}</td>
         <td>{{ $post->email }}</td>
         <td><img src="{{ $post->image }}" width="70px" height="70px" alt="Image"></td>
@@ -28,8 +30,8 @@
     @endforelse
 </tbody>
 </table>  
-<div class="row">
+{{-- <div class="row">
     {{$posts->links('pagination::bootstrap-4')}}
-  </div>
+  </div> --}}
 </div>
 @endsection

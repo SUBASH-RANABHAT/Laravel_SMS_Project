@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\StudentDashboard;
 use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\CalenderController;
 use App\Http\Controllers\ClassController;
@@ -25,13 +26,16 @@ use App\Http\Controllers\ScheduleController;
 |
 */
 
-Route::post('/student/check', [StudentController::class, 'check'])->name('student_check');
 
 Route::get('/', [IndexController::class, 'index']);
 
 Route::get('/student/register', [StudentController::class, 'index'])->name('student_register');
 Route::get('/student/login', [StudentController::class, 'login'])->name('student_login');
 Route::post('/student/store', [StudentController::class, 'storeStudent'])->name('student_store');
+Route::get('/student/check', [StudentController::class, 'check'])->name('student_check');
+
+Route::get('/student/dashboard', [StudentDashboard::class, 'index'])->name('student_dashboard');
+Route::get('/student/profile', [StudentController::class, 'profile'])->name('student_profile');
 
 
 Auth::routes();
@@ -97,3 +101,9 @@ Route::get('calendar', [CalendarController::class, 'index'])->name('calendar.ind
 Route::post('calendar/store', [CalendarController::class, 'store'])->name('calendar.store');
 Route::get('calendar/add_event', [CalendarController::class, 'event'])->name('calender.event');
 Route::post('calendar/event_store', [CalendarController::class, 'event_store'])->name('calendar.event_store');
+Route::get('student/calendar', [CalendarController::class, 'student_index'])->name('calendar.student');
+
+
+Route::get('student/attendance', [StudentController::class, 'attend'])->name('attendance');
+Route::get('student/fee', [StudentController::class, 'fee'])->name('fee');
+Route::get('student/result', [StudentController::class, 'result'])->name('result');

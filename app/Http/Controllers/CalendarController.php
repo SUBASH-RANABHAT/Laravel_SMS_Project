@@ -50,4 +50,17 @@ class CalendarController extends Controller
 
         return view('Backend.Calendar.addEvent')->with('message', "Event added Successfully");
     }
+
+    public function student_index()
+    {
+        $event = array();
+        $datas = Event::all();
+        foreach ($datas as $data)
+            $event[] = [
+                'title' => $data->title,
+                'start' => $data->start_date,
+                'end' => $data->end_date,
+            ];
+        return view('Backend.Calendar.student_calender', ['event' => $event]);
+    }
 }

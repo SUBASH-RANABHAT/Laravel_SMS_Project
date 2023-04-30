@@ -47,7 +47,7 @@ form {
     </nav>
     <div class="card">
       @if(session('message'))
-      <h4 class="alert alert-warning">{{ session('message')}}</h4>
+      <h4 class="alert alert-success">{{ session('message')}}</h4>
       @endif
   
   
@@ -82,6 +82,13 @@ form {
           <div class="col-sm-12">
           <input type="email" class="form-control" name="email" value=""/></div>
           <span class="text-danger">@error('email'){{$message}}@enderror</span>
+        </div>
+        <div class="form-group">
+          <label for="name">Class</label>
+          <div class="col-sm-12">
+          <input type="text" class="form-control" name="class" value=""/>
+          </div>
+          <span class="text-danger">@error('class'){{$message}}@enderror</span>
         </div>
         <div class="form-group">
           <label for="name">Roll No:</label>

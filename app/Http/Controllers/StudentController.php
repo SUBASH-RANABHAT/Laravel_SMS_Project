@@ -25,6 +25,7 @@ class StudentController extends Controller
     {
         $student = $this->model->create([
             'name' => $request->name,
+            'class' => $request->class,
             'email' => $request->email,
             'roll_no' => $request->roll_no,
             'password' => $request->password,
@@ -70,6 +71,7 @@ class StudentController extends Controller
 
         $students = $this->model->get();
         $student->name = $request->name;
+        $student->class = $request->class;
         $student->roll_no = $request->roll_no;
         $student->email = $request->email;
         $student->password = $request->password;
@@ -100,19 +102,34 @@ class StudentController extends Controller
     }
 
 
-    public function check(StudentLoginRequest $request)
+    public function check(StudentLoginRequest $req)
     {
-        // dd('asdasd');
-        // dd($req);
-        // $student = Student::where('email', '=', $req->email)->first();
-        // if (!$student) {
-        //     return redirect()->back()->with('fail', "Cannot match your credentials");
-        // } else {
-        //     if (Hash::check($req->password, $student->password)) {
-        //         $req->session()->put('LoggedUser', $student->id);
-        //     } else {
-        //         return back()->with('fail', 'Incorrect password');
-        //     }
-        // }
+        $student = Student::where('email', '=', $req->email)->first();
+        if (!$student) {
+            return redirect()->back()->with('fail', "Cannot match your credentials");
+        } else {
+            if (Hash::check($req->password, $student->password)) {
+                $req->session()->put('LoggedUser', $student->id);
+            } else {
+                return back()->with('fail', 'Incorrect password');
+            }
+        }
+        return view('Backend.students.student');
+    }
+
+    public function attend()
+    {
+        return view('Backend.students.attendance');
+    }
+
+    public function fee()
+    {
+        $posts = $this->model->get();
+        return view('Backend.students.fee', compact('posts'));
+    }
+
+    public function result()
+    {
+        return view('Backend.students.result');
     }
 }
